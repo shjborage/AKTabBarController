@@ -65,6 +65,9 @@ typedef NS_ENUM(NSInteger, AKTabBarPosition) {
 //
 @property (nonatomic, assign) CGFloat tabWidth;
 
+// Is Drawing the gradient
+@property (nonatomic, assign) BOOL isGradient;
+
 - (void)tabSelected:(AKTab *)sender;
 
 @end

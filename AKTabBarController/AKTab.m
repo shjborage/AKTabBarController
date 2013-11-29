@@ -292,31 +292,32 @@ static const float kTopMargin = 2.0;
     } else if (self.selected) {
         
         // We fill the background with a noise pattern
-        CGContextSaveGState(ctx);
-        {
+        if (_isFillBackgroundNoisePattern) {
+          CGContextSaveGState(ctx);
+          {
             if (_selectedBackgroundImageName) {
-                UIImage *backgroundImage = [UIImage imageNamed:_selectedBackgroundImageName];
-                if(!UIEdgeInsetsEqualToEdgeInsets(self.backgroundImageCapInsets, UIEdgeInsetsZero)) {
-                    [[backgroundImage resizableImageWithCapInsets:self.backgroundImageCapInsets] drawInRect:rect];
-                } else {
-                    [[UIColor colorWithPatternImage:backgroundImage] set];
-                    CGContextFillRect(ctx, rect);
-                }
+              UIImage *backgroundImage = [UIImage imageNamed:_selectedBackgroundImageName];
+              if(!UIEdgeInsetsEqualToEdgeInsets(self.backgroundImageCapInsets, UIEdgeInsetsZero)) {
+                [[backgroundImage resizableImageWithCapInsets:self.backgroundImageCapInsets] drawInRect:rect];
+              } else {
+                [[UIColor colorWithPatternImage:backgroundImage] set];
+                CGContextFillRect(ctx, rect);
+              }
             }
             else {
-                [[UIColor colorWithPatternImage:[UIImage imageNamed:@"AKTabBarController.bundle/noise-pattern"]] set];
-                CGContextFillRect(ctx, rect);
+              [[UIColor colorWithPatternImage:[UIImage imageNamed:@"AKTabBarController.bundle/noise-pattern"]] set];
+              CGContextFillRect(ctx, rect);
             }
             
             // We set the parameters of the gradient multiply blend
             size_t num_locations = 2;
             CGFloat locations[2] = {1.0, 0.0};
             CGFloat components[8] = {0.6, 0.6, 0.6, 1.0,  // Start color
-                0.2, 0.2, 0.2, 0.4}; // End color
+              0.2, 0.2, 0.2, 0.4}; // End color
             
             UIColor *topEdgeColor = _topEdgeColor;
             if (!topEdgeColor) {
-                topEdgeColor = _edgeColor ?: [UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f];
+              topEdgeColor = _edgeColor ?: [UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f];
             }
             int topMargin = topEdgeColor == [UIColor clearColor] ? 0 : kTopMargin;
             
@@ -332,9 +333,10 @@ static const float kTopMargin = 2.0;
             
             CGColorSpaceRelease(colorSpace);
             CGGradientRelease(gradient);
+          }
+          CGContextRestoreGState(ctx);
         }
-        CGContextRestoreGState(ctx);
-        
+      
         // We draw the vertical lines for the border
         CGContextSaveGState(ctx);
         {

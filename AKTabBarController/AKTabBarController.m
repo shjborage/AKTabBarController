@@ -109,7 +109,8 @@ typedef enum {
     tabBar.delegate = self;
 	
     [tabBar setTabWidth:[self tabWidth]];
-    
+    [tabBar setIsGradient:[self isGradient]];
+  
     tabBarView.tabBar = tabBar;
     tabBarView.contentView = _selectedViewController.view;
     tabBarView.tabBarPosition = tabBarPosition;
@@ -154,6 +155,7 @@ typedef enum {
         [tab setSelectedTextColor:[self selectedTextColor]];
         [tab setTabTitleFont:[self textFont]];
         [tab setTabTitle:[vc tabTitle]];
+        [tab setIsFillBackgroundNoisePattern:[self isFillBackgroundNoisePattern]];
 
         [tab setTabBarHeight:tabBarHeight];
         

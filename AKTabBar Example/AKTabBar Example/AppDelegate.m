@@ -113,7 +113,12 @@
                                         img.size.width, img.size.height);
     [_tabBarController.view addSubview:bottomCenterView];
      */
-
+  
+    /*
+    // Background gradient and fill noise pattern
+    [_tabBarController setIsGradient:NO];
+    [_tabBarController setIsFillBackgroundNoisePattern:NO];
+     */
     [_window setRootViewController:_tabBarController];
     [_window makeKeyAndVisible];
     return YES;

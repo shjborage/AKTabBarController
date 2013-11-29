@@ -96,6 +96,9 @@
 // Used to show / hide title.
 @property (nonatomic, assign) BOOL titleIsHidden;
 
+// Is fill the background with a noise pattern
+@property (nonatomic, assign) BOOL isFillBackgroundNoisePattern;
+
 - (void)drawBackground:(CGContextRef)ctx
                 inRect:(CGRect)rect;
 @end

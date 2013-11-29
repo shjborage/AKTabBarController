@@ -104,6 +104,12 @@
 // Whether the resizing is allowed (for example when the orientation changes)
 @property (nonatomic) BOOL tabBarHasFixedHeight;
 
+// Is fill the background with a noise pattern
+@property (nonatomic, assign) BOOL isFillBackgroundNoisePattern;
+
+// Is Drawing the gradient
+@property (nonatomic, assign) BOOL isGradient;
+
 // Initialization with a specific height.
 - (id)initWithTabBarHeight:(NSUInteger)height;
 

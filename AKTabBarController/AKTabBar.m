@@ -105,13 +105,14 @@ static int kTopEdgeWidth   = 1;
     }
     
     // Drawing the gradient
-    CGContextSaveGState(ctx);
-    {
+    if (_isGradient) {
+      CGContextSaveGState(ctx);
+      {
         // We set the parameters of the gradient multiply blend
         size_t num_locations = 2;
         CGFloat locations[2] = {0.0, 1.0};
         CGFloat components[8] = {0.9, 0.9, 0.9, 1.0,    // Start color
-            0.2, 0.2, 0.2, 0.8};    // End color
+          0.2, 0.2, 0.2, 0.8};    // End color
         
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         CGGradientRef gradient = _tabColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
@@ -120,9 +121,10 @@ static int kTopEdgeWidth   = 1;
         
         CGColorSpaceRelease(colorSpace);
         CGGradientRelease(gradient);
+      }
+      CGContextRestoreGState(ctx);
     }
-    CGContextRestoreGState(ctx);
-    
+  
     // Drawing the top dark emboss
     UIColor *topEdgeColor = _topEdgeColor;
     if (!topEdgeColor) {
@@ -153,7 +155,7 @@ static int kTopEdgeWidth   = 1;
         CGRect tabRect = CGRectMake(tab.frame.origin.x - kInterTabMargin, kTopEdgeWidth, kInterTabMargin, rect.size.height);
         CGContextFillRect(ctx, tabRect);
     }
-    
+  
 }
 
 - (void)layoutSubviews
