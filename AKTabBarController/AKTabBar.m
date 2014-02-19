@@ -75,6 +75,8 @@ static int kTopEdgeWidth   = 1;
 
 - (void)setSelectedTab:(AKTab *)selectedTab
 {
+    [self setNeedsDisplay];
+  
     if (selectedTab != _selectedTab) {
         [_selectedTab setSelected:NO];
         _selectedTab = selectedTab;
